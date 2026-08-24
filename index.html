@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Samada — Catálogo Digital Interactivo | Belleza y Cuidado Capilar</title>
+<meta name="description" content="Catálogo digital interactivo de Samada. Shampoo, tratamientos, tintes, maquillaje y productos de cuidado capilar para salón y uso diario en Piura.">
+<link rel="icon" type="image/png" href="assets/samada-logo.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-c44c12f4-671e-419c-aef7-b6882188e1fd/styles.css">
+<script src="_ds/nocturne-c44c12f4-671e-419c-aef7-b6882188e1fd/_ds_bundle.js"></script>
+<style>
+body{margin:0;background:var(--sa-bg);color:var(--sa-text);-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;transition:background-color .3s ease,color .3s ease}
+a{color:var(--sa-accent);text-decoration:none}
+a:hover{color:var(--sa-accent-hover)}
+button{font-family:inherit}
+@keyframes saShimmer{0%{transform:translateX(-70%)}100%{transform:translateX(170%)}}
+@keyframes saRise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+/* ── Temas ─────────────────────────────────────────────────────────────
+   Todo el catálogo pinta con estos tokens; el botón del header sólo
+   cambia data-tema en <html> y el navegador re-resuelve las variables.
+   Los --color-* puentean el design system Nocturne (.btn, .tag, .input,
+   .table) para que sus componentes acompañen el cambio de tema. */
+:root{
+  --sa-bg:#161826;--sa-bg-2:#1e2233;--sa-surface:#232532;--sa-surface-alt:#1c1f2e;
+  --sa-surface-2:#1d2030;--sa-surface-3:#20243a;--sa-surface-deep:#1a1c2b;
+  --sa-ph-1:#22253a;--sa-ph-2:#191c2b;
+  --sa-accent:#7bc043;--sa-accent-hover:#9ed46f;--sa-accent-deep:#1e2f10;
+  --sa-accent-tint:rgba(123,192,67,.15);--sa-accent-solid:#7bc043;--sa-accent-on:#161826;
+  --sa-text:#e9e9ed;
+  --sa-t1:rgba(233,233,237,.74);--sa-t2:rgba(233,233,237,.57);--sa-t3:rgba(233,233,237,.44);
+  --sa-t4:rgba(233,233,237,.34);--sa-t5:rgba(233,233,237,.26);
+  --sa-line:rgba(233,233,237,.10);--sa-line-soft:rgba(233,233,237,.07);
+  --sa-line-2:rgba(233,233,237,.15);--sa-line-solid:#595d6c;
+  --sa-shine:rgba(233,233,237,.055);--sa-hover:rgba(233,233,237,.05);--sa-dot:rgba(233,233,237,.22);
+  --sa-bar:rgba(22,24,38,.9);--sa-btn-bg:rgba(22,24,38,.78);--sa-chip-bg:rgba(22,24,38,.7);
+  --sa-backdrop:rgba(14,15,23,.74);--sa-logo-chip:#f3f5fe;
+  --sa-spine-1:rgba(0,0,0,.42);--sa-spine-2:rgba(0,0,0,.28);
+  --sa-shadow-fab:0 10px 26px rgba(0,0,0,.5);
+  --sa-shadow-modal:0 16px 40px rgba(0,0,0,.65);
+  --sa-shadow-flip:0 34px 70px rgba(0,0,0,.6);
+  --color-accent:#7bc043;--color-accent-100:#f1f9e8;--color-accent-800:#35561c;
+}
+:root[data-tema="claro"]{
+  --sa-bg:#eceef4;--sa-bg-2:#f7f8fc;--sa-surface:#fbfbfd;--sa-surface-alt:#f1f2f8;
+  --sa-surface-2:#f4f5fa;--sa-surface-3:#ebedf6;--sa-surface-deep:#e6e8f2;
+  --sa-ph-1:#e4e6ef;--sa-ph-2:#d6d9e5;
+  --sa-accent:#4d861f;--sa-accent-hover:#3b6a14;--sa-accent-deep:#e7f2da;
+  --sa-accent-tint:rgba(77,134,31,.14);--sa-accent-solid:#57952a;--sa-accent-on:#f7fbf3;
+  --sa-text:#23252f;
+  --sa-t1:rgba(35,37,47,.80);--sa-t2:rgba(35,37,47,.64);--sa-t3:rgba(35,37,47,.52);
+  --sa-t4:rgba(35,37,47,.42);--sa-t5:rgba(35,37,47,.32);
+  --sa-line:rgba(35,37,47,.13);--sa-line-soft:rgba(35,37,47,.09);
+  --sa-line-2:rgba(35,37,47,.17);--sa-line-solid:#c9ccd8;
+  --sa-shine:rgba(251,251,253,.65);--sa-hover:rgba(35,37,47,.05);--sa-dot:rgba(35,37,47,.2);
+  --sa-bar:rgba(247,248,252,.92);--sa-btn-bg:rgba(251,251,253,.88);--sa-chip-bg:rgba(251,251,253,.82);
+  --sa-backdrop:rgba(35,37,47,.34);--sa-logo-chip:transparent;
+  --sa-spine-1:rgba(35,37,47,.16);--sa-spine-2:rgba(35,37,47,.09);
+  --sa-shadow-fab:0 8px 22px rgba(35,37,47,.22);
+  --sa-shadow-modal:0 16px 44px rgba(35,37,47,.22);
+  --sa-shadow-flip:0 28px 60px rgba(35,37,47,.22);
+  --color-accent:#4d861f;--color-bg:#eceef4;--color-surface:#fbfbfd;--color-text:#23252f;
+  --color-divider:rgba(35,37,47,.16);
+  --shadow-sm:0 0 0 1px rgba(35,37,47,.12);
+  --shadow-md:0 0 0 1px rgba(35,37,47,.12),0 6px 18px rgba(35,37,47,.12);
+  --shadow-lg:0 0 0 1px rgba(35,37,47,.14),0 16px 40px rgba(35,37,47,.18);
+}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;font-family:Inter,system-ui,sans-serif;background:radial-gradient(120% 70% at 50% -15%,var(--sa-bg-2) 0%,var(--sa-bg) 55%)">
+
+<header style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:11px 18px;position:sticky;top:0;z-index:40;background:var(--sa-bar);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--sa-line)">
+  <span style="display:block;background:var(--sa-logo-chip);border-radius:8px;padding:7px 12px;flex:none;line-height:0">
+    <img src="assets/samada-logo.png" alt="Samada" style="height:20px;width:auto;display:block">
+  </span>
+  <span style="font:500 10px/1.2 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sa-t3);margin-right:auto">Catálogo<br>digital</span>
+
+  <label style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--sa-t2)">
+    <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="var(--sa-accent)" stroke-width="16" stroke-linecap="round"><path d="M128 232s80-64 80-128a80 80 0 0 0-160 0c0 64 80 128 80 128Z"/><circle cx="128" cy="100" r="28"/></svg>
+    <select class="input" data-cms-collection="sedes" onChange="{{ elegirSede }}" style="max-width:250px;font-size:12px;min-height:32px">
+      <sc-for list="{{ sedes }}" as="s" hint-placeholder-count="1">
+        <option value="{{ s.id }}">{{ s.opcion }}</option>
+      </sc-for>
+    </select>
+  </label>
+
+  <button type="button" onClick="{{ cambiarTema }}" aria-label="{{ temaAria }}" title="{{ temaAria }}" style="flex:none;width:34px;height:34px;display:grid;place-items:center;border-radius:8px;border:1px solid var(--sa-line-2);background:transparent;color:var(--sa-text);cursor:pointer;transition:color .2s ease,border-color .2s ease" style-hover="border-color:var(--sa-accent);color:var(--sa-accent)">
+    <sc-if value="{{ temaOscuro }}" hint-placeholder-val="{{ true }}">
+      <svg width="17" height="17" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"><circle cx="128" cy="128" r="56"/><path d="M128 34V16M128 240v-18M34 128H16M240 128h-18M62 62L49 49M207 207l-13-13M62 194l-13 13M207 49l-13 13"/></svg>
+    </sc-if>
+    <sc-if value="{{ temaClaro }}" hint-placeholder-val="{{ false }}">
+      <svg width="17" height="17" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M216 152A96 96 0 0 1 104 40a96 96 0 1 0 112 112Z"/></svg>
+    </sc-if>
+  </button>
+  <a class="btn btn-primary" href="{{ waHref }}" target="_blank" rel="noopener" data-cms-field="sede.whatsapp" style="flex:none;gap:8px">
+    <svg width="16" height="16" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M45 196a96 96 0 1 1 35 35l-44 13Z"/><path d="M96 108c0 28 24 52 52 52l12-14 20 10c-4 14-16 22-32 22-34 0-64-30-64-64 0-16 8-28 22-32l10 20Z" fill="currentColor" stroke="none"/></svg>
+    Cotizar por WhatsApp
+  </a>
+</header>
+
+<nav aria-label="Filtros del catálogo" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px;padding:9px 18px 11px;box-shadow:0 1px 0 var(--sa-line-soft)">
+  <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+    <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--sa-t4)">Categoría</span>
+    <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+      <button type="button" onClick="{{ c.pick }}" style="position:relative;border:1px solid var(--sa-line-2);background:transparent;color:var(--sa-text);font:500 12px/1 Inter,sans-serif;padding:7px 11px;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:6px" style-hover="border-color:var(--sa-t4)">
+        <sc-if value="{{ c.on }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;inset:-1px;background:var(--sa-accent-tint);border:1px solid var(--sa-accent);border-radius:6px"></span>
+        </sc-if>
+        <span style="position:relative">{{ c.nombre }}</span>
+        <span style="position:relative;font-size:10px;opacity:.45">{{ c.n }}</span>
+      </button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ haySubs }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap">
+      <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--sa-t4)">Subcategoría</span>
+      <sc-for list="{{ subs }}" as="s" hint-placeholder-count="4">
+        <button type="button" onClick="{{ s.pick }}" style="position:relative;border:0;background:transparent;color:var(--sa-text);font:400 12px/1 Inter,sans-serif;padding:6px 9px;border-radius:5px;cursor:pointer" style-hover="background:var(--sa-hover)">
+          <sc-if value="{{ s.on }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;left:9px;right:9px;bottom:1px;height:2px;background:var(--sa-accent);border-radius:2px"></span>
+          </sc-if>
+          <span style="position:relative">{{ s.nombre }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <div style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-left:auto">
+    <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--sa-t4)">Marca</span>
+    <sc-for list="{{ marcas }}" as="m" hint-placeholder-count="3">
+      <button type="button" onClick="{{ m.pick }}" style="position:relative;border:1px solid var(--sa-line-2);background:transparent;color:var(--sa-text);font:400 11.5px/1 Inter,sans-serif;padding:6px 10px;border-radius:20px;cursor:pointer" style-hover="border-color:var(--sa-t4)">
+        <sc-if value="{{ m.on }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;inset:-1px;background:var(--sa-accent-tint);border:1px solid var(--sa-accent);border-radius:20px"></span>
+        </sc-if>
+        <span style="position:relative">{{ m.nombre }}</span>
+      </button>
+    </sc-for>
+    <sc-if value="{{ hayFiltro }}" hint-placeholder-val="{{ false }}">
+      <button class="btn btn-ghost" type="button" onClick="{{ limpiar }}" style="font-size:11.5px">Quitar filtros</button>
+    </sc-if>
+  </div>
+</nav>
+
+<main style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px 14px 10px;min-height:0">
+
+  <div style="{{ stageStyle }}" onTouchStart="{{ tStart }}" onTouchEnd="{{ tEnd }}">
+    <sc-for list="{{ layers }}" as="L" hint-placeholder-count="1">
+      <div style="{{ L.style }}">
+        <sc-for list="{{ L.pages }}" as="page" hint-placeholder-count="2">
+          <article data-screen-label="{{ page.label }}" style="position:relative;flex:1 1 0;min-width:0;height:100%;border-radius:9px;overflow:hidden;container-type:size;box-shadow:0 0 0 1px var(--sa-line)">
+
+            <sc-if value="{{ page.esPortadaArte }}" hint-placeholder-val="{{ true }}">
+              <div style="height:100%;padding:14px;display:flex;flex-direction:column;background:linear-gradient(160deg,var(--sa-accent-deep) 0%,var(--sa-bg) 62%)">
+                <div style="position:relative;flex:1;min-height:0;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--sa-line);background:var(--sa-ph-1)">
+                  <img src="assets/portada.webp" alt="Catálogo Samada 2026" style="width:100%;height:100%;object-fit:cover;display:block">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,38,0.05) 0%,rgba(22,24,38,0.7) 100%);pointer-events:none"></div>
+                  <div style="position:absolute;bottom:14px;left:14px;right:14px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.7)">
+                    <span style="font:600 10px/1 Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--sa-accent)">Samada · Piura</span>
+                    <h3 style="margin:4px 0 0;font-weight:600;font-size:clamp(16px,4.5cqw,24px);line-height:1.15;letter-spacing:-.02em">Edición Profesional</h3>
+                  </div>
+                </div>
+                <p style="margin:10px 0 0;font:500 9.5px/1.4 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--sa-t3)">Samada · Piura</p>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esPortadaTexto }}" hint-placeholder-val="{{ true }}">
+              <div style="height:100%;padding:clamp(20px,5cqw,40px);display:flex;flex-direction:column;background:linear-gradient(200deg,var(--sa-surface),var(--sa-surface-deep))">
+                <span style="display:block;background:var(--sa-logo-chip);border-radius:8px;padding:8px 13px;line-height:0;align-self:flex-start">
+                  <img src="assets/samada-logo.png" alt="Samada" style="height:clamp(18px,3.4cqw,26px);width:auto;display:block">
+                </span>
+                <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(8px,1.6cqw,14px)">
+                  <span style="font:500 clamp(9px,2cqw,11px)/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--sa-accent)">{{ edicion }}</span>
+                  <h1 style="margin:0;font-weight:500;font-size:clamp(26px,8.4cqw,52px);line-height:1.02;letter-spacing:-.03em">Belleza y cuidado capilar</h1>
+                  <span style="display:block;width:64px;height:2px;background:var(--sa-accent)"></span>
+                  <p style="margin:0;font-size:clamp(11px,2.5cqw,14px);line-height:1.55;color:var(--sa-t1);max-width:34ch;text-wrap:pretty">Shampoo, tratamiento, color y maquillaje seleccionados para salón y uso diario. Precios en soles, stock confirmado por WhatsApp.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;font-size:clamp(10px,2.2cqw,12px);color:var(--sa-t2)">
+                  <span>{{ sedeNombre }}</span>
+                  <span>{{ sedeDir }}</span>
+                  <span style="display:inline-flex;align-items:center;gap:7px;color:var(--sa-accent);margin-top:6px">
+                    Desliza o usa las flechas
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"><path d="M96 48l80 80-80 80"/></svg>
+                  </span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esIndiceIntro }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;padding:clamp(20px,5cqw,38px);display:flex;flex-direction:column;justify-content:space-between;background:var(--sa-surface-alt)">
+                <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--sa-t4)">El catálogo</span>
+                <p style="margin:0;font-weight:500;font-size:clamp(19px,5.4cqw,33px);line-height:1.14;letter-spacing:-.02em;text-wrap:pretty">Todo el cuidado del cabello, en un solo lugar.</p>
+                <div style="display:flex;gap:clamp(14px,4cqw,30px);flex-wrap:wrap">
+                  <span style="display:flex;flex-direction:column;gap:2px"><b style="font-weight:500;font-size:clamp(18px,4.6cqw,28px);color:var(--sa-accent)">{{ totalProductos }}</b><span style="font-size:10.5px;color:var(--sa-t3)">productos</span></span>
+                  <span style="display:flex;flex-direction:column;gap:2px"><b style="font-weight:500;font-size:clamp(18px,4.6cqw,28px);color:var(--sa-accent)">{{ totalCategorias }}</b><span style="font-size:10.5px;color:var(--sa-t3)">categorías</span></span>
+                  <span style="display:flex;flex-direction:column;gap:2px"><b style="font-weight:500;font-size:clamp(18px,4.6cqw,28px);color:var(--sa-accent)">{{ totalSedes }}</b><span style="font-size:10.5px;color:var(--sa-t3)">sede</span></span>
+                </div>
+                <p style="margin:0;font-size:10.5px;line-height:1.5;color:var(--sa-t4);max-width:36ch">Contenido disponible en sede. Fotos, precios y stock confirmados directamente por WhatsApp.</p>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esIndice }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;padding:clamp(18px,4.4cqw,34px);display:flex;flex-direction:column;gap:clamp(10px,2cqw,16px);background:var(--sa-surface)">
+                <h2 style="margin:0;font-weight:500;font-size:clamp(16px,4.2cqw,24px);letter-spacing:-.01em">Contenido</h2>
+                <div style="display:flex;flex-direction:column;flex:1;min-height:0">
+                  <sc-for list="{{ indice }}" as="i" hint-placeholder-count="5">
+                    <button type="button" onClick="{{ i.pick }}" style="display:flex;align-items:baseline;gap:10px;padding:clamp(6px,1.4cqw,10px) 4px;background:transparent;border:0;border-bottom:1px solid var(--sa-line);color:var(--sa-text);cursor:pointer;text-align:left;width:100%" style-hover="background:var(--sa-hover)">
+                      <span style="font:500 10px/1 Inter,sans-serif;color:var(--sa-accent);min-width:20px">{{ i.orden }}</span>
+                      <span style="flex:1;font-size:clamp(11px,2.6cqw,14px)">{{ i.nombre }}</span>
+                      <span style="font-size:10px;color:var(--sa-t3)">{{ i.n }}</span>
+                      <span style="font:500 11px/1 Inter,sans-serif;color:var(--sa-t2);min-width:22px;text-align:right">{{ i.pag }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esDestacado }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;display:flex;flex-direction:column;background:linear-gradient(180deg,var(--sa-surface-2),var(--sa-surface))">
+                <div style="position:relative;flex:1 1 52%;min-height:0;margin:clamp(12px,2.6cqw,18px) clamp(12px,2.6cqw,18px) 0;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--sa-line-soft);background:var(--sa-ph-1)">
+                  <sc-if value="{{ page.item.imagen }}" hint-placeholder-val="{{ true }}">
+                    <img src="{{ page.item.imagen }}" alt="{{ page.item.nombre }}" style="width:100%;height:100%;object-fit:cover;display:block">
+                  </sc-if>
+                  <sc-if value="{{ page.item.noImagen }}" hint-placeholder-val="{{ false }}">
+                    <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--sa-ph-1),var(--sa-ph-2))">
+                      <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--sa-shine),transparent);animation:saShimmer 3.2s ease-in-out infinite"></div>
+                      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;color:var(--sa-t4)">
+                        <svg width="22" height="22" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="14"><rect x="32" y="48" width="192" height="160" rx="10"/><circle cx="94" cy="102" r="17"/><path d="M32 178l58-50 46 39 34-29 54 46"/></svg>
+                        <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.09em">1200 × 1200</span>
+                      </div>
+                    </div>
+                  </sc-if>
+                  <span class="tag tag-outline" style="position:absolute;top:9px;left:9px;font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--sa-chip-bg);backdrop-filter:blur(6px)">Destacado</span>
+                </div>
+                <div style="padding:clamp(12px,2.8cqw,20px) clamp(16px,3.6cqw,26px) clamp(24px,4cqw,30px);display:flex;flex-direction:column;gap:clamp(5px,1.1cqw,9px)">
+                  <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sa-accent)">{{ page.kicker }}</span>
+                  <h2 data-cms-field="producto.nombre" style="margin:0;font-weight:500;font-size:clamp(16px,4.6cqw,27px);line-height:1.1;letter-spacing:-.02em">{{ page.item.nombre }}</h2>
+                  <span style="font-size:11px;color:var(--sa-t3)">{{ page.item.marcaTxt }} · {{ page.item.presentacion }}</span>
+                  <div style="display:flex;align-items:baseline;gap:9px;margin-top:2px">
+                    <sc-if value="{{ page.item.consultar }}" hint-placeholder-val="{{ false }}">
+                      <span style="font:500 clamp(14px,3.4cqw,19px)/1 Inter,sans-serif;color:var(--sa-t1)">Consultar precio</span>
+                    </sc-if>
+                    <sc-if value="{{ page.item.conPrecio }}" hint-placeholder-val="{{ false }}">
+                      <span data-cms-field="producto.precio" style="font:500 clamp(20px,5.6cqw,33px)/1 Inter,sans-serif;color:var(--sa-accent);letter-spacing:-.02em">{{ page.item.precioTxt }}</span>
+                    </sc-if>
+                    <sc-if value="{{ page.item.conAntes }}" hint-placeholder-val="{{ false }}">
+                      <span style="font-size:12px;color:var(--sa-t3);text-decoration:line-through">{{ page.item.antesTxt }}</span>
+                    </sc-if>
+                  </div>
+                  <p style="margin:0;font-size:clamp(10.5px,2.3cqw,12.5px);line-height:1.55;color:var(--sa-t1);text-wrap:pretty">{{ page.item.desc }}</p>
+                  <div style="display:flex;gap:8px;margin-top:clamp(4px,1cqw,8px);flex-wrap:wrap">
+                    <button class="btn btn-secondary" type="button" onClick="{{ page.item.open }}" style="font-size:12px">Ver ficha</button>
+                    <a class="btn btn-primary" href="{{ page.item.wa }}" target="_blank" rel="noopener" style="font-size:12px;gap:7px">
+                      <svg width="14" height="14" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"><path d="M45 196a96 96 0 1 1 35 35l-44 13Z"/></svg>
+                      Consultar stock
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esGrilla }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;display:flex;flex-direction:column;background:var(--sa-surface)">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:clamp(14px,3cqw,22px) clamp(14px,3cqw,22px) clamp(8px,1.6cqw,12px)">
+                  <h3 style="margin:0;font-weight:500;font-size:clamp(13px,3.2cqw,19px);letter-spacing:-.01em">{{ page.titulo }}</h3>
+                  <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--sa-t4)">{{ page.conteo }}</span>
+                </div>
+                <div style="flex:1;min-height:0;padding:0 clamp(14px,3cqw,22px);display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--sa-card,150px),1fr));grid-auto-rows:1fr;gap:clamp(7px,1.6cqw,11px);align-content:start;overflow:hidden">
+                  <sc-for list="{{ page.items }}" as="it" hint-placeholder-count="6">
+                    <button type="button" onClick="{{ it.open }}" data-cms-collection="productos" style="display:flex;flex-direction:column;gap:5px;padding:7px;background:var(--sa-surface-2);border:1px solid var(--sa-line);border-radius:8px;color:var(--sa-text);text-align:left;cursor:pointer;overflow:hidden;min-height:0" style-hover="border-color:var(--sa-accent);background:var(--sa-surface-3)">
+                      <div style="position:relative;flex:1;min-height:0;border-radius:5px;overflow:hidden;background:var(--sa-ph-1)">
+                        <sc-if value="{{ it.imagen }}" hint-placeholder-val="{{ true }}">
+                          <img src="{{ it.imagen }}" alt="{{ it.nombre }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
+                        </sc-if>
+                        <sc-if value="{{ it.noImagen }}" hint-placeholder-val="{{ false }}">
+                          <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--sa-ph-1),var(--sa-ph-2))">
+                            <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--sa-shine),transparent);animation:saShimmer 3.6s ease-in-out infinite"></div>
+                            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--sa-t5)">
+                              <svg width="17" height="17" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="15"><rect x="32" y="48" width="192" height="160" rx="10"/><circle cx="94" cy="102" r="17"/><path d="M32 178l58-50 46 39 34-29 54 46"/></svg>
+                            </div>
+                          </div>
+                        </sc-if>
+                      </div>
+                      <span style="font-size:11.5px;line-height:1.25;display:block;max-height:2.5em;overflow:hidden;font-weight:500">{{ it.nombre }}</span>
+                      <span style="font-size:9.5px;color:var(--sa-t3);letter-spacing:.04em">{{ it.marcaTxt }}</span>
+                      <sc-if value="{{ it.conPrecio }}" hint-placeholder-val="{{ true }}">
+                        <span style="font:500 12px/1 Inter,sans-serif;color:var(--sa-accent)">{{ it.precioTxt }}</span>
+                      </sc-if>
+                      <sc-if value="{{ it.consultar }}" hint-placeholder-val="{{ false }}">
+                        <span style="font-size:10.5px;color:var(--sa-t2)">Consultar precio</span>
+                      </sc-if>
+                    </button>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ page.vacia }}" hint-placeholder-val="{{ false }}">
+                  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:24px;text-align:center">
+                    <p style="margin:0;font-size:13px;color:var(--sa-t2);max-width:28ch">Fin de la sección. Pedidos y stock de otras presentaciones por WhatsApp.</p>
+                    <a class="btn btn-primary" href="{{ waHref }}" target="_blank" rel="noopener" style="font-size:12px">Escribir a la sede</a>
+                  </div>
+                </sc-if>
+                <p style="margin:0;padding:clamp(8px,1.6cqw,12px) clamp(14px,3cqw,22px) clamp(22px,3.6cqw,28px);font-size:10px;color:var(--sa-t4)">Precios en soles (S/). Toca un producto para ver la ficha completa.</p>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esContactoArte }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;padding:14px;background:linear-gradient(200deg,var(--sa-accent-deep),var(--sa-bg) 70%);display:flex">
+                <div style="position:relative;flex:1;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--sa-line);background:var(--sa-ph-1)">
+                  <img src="assets/contacto.webp" alt="Sede Samada Piura" style="width:100%;height:100%;object-fit:cover;display:block">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,38,0.05) 0%,rgba(22,24,38,0.7) 100%);pointer-events:none"></div>
+                  <div style="position:absolute;bottom:14px;left:14px;right:14px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.7)">
+                    <span style="font:600 10px/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--sa-accent)">Sede Principal</span>
+                    <h3 style="margin:4px 0 0;font-weight:600;font-size:clamp(16px,4.5cqw,24px);line-height:1.15;letter-spacing:-.02em">Piura · Mercado San José</h3>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esContacto }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;padding:clamp(20px,5cqw,38px);display:flex;flex-direction:column;gap:clamp(10px,2.4cqw,18px);background:var(--sa-surface)">
+                <span style="font:500 9.5px/1 Inter,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--sa-accent)">Visítanos</span>
+                <h2 style="margin:0;font-weight:500;font-size:clamp(19px,5.2cqw,31px);line-height:1.08;letter-spacing:-.02em">Atención y cotización inmediata</h2>
+                <div style="display:flex;flex-direction:column;gap:7px;padding:clamp(12px,2.6cqw,18px);border-radius:8px;background:var(--sa-surface-2);box-shadow:inset 0 0 0 1px var(--sa-line-soft)">
+                  <span style="font:500 clamp(12px,2.8cqw,15px)/1.3 Inter,sans-serif">{{ sedeNombre }}</span>
+                  <span style="font-size:11.5px;line-height:1.5;color:var(--sa-t1)">{{ sedeDir }}</span>
+                  <span style="font-size:11.5px;color:var(--sa-t1)">{{ sedeCiudad }}</span>
+                  <span style="font-size:11.5px;color:var(--sa-t3)">{{ sedeHorario }}</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <a class="btn btn-primary btn-block" href="{{ waHref }}" target="_blank" rel="noopener" style="justify-content:center;margin-top:0;gap:8px">
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"><path d="M45 196a96 96 0 1 1 35 35l-44 13Z"/></svg>
+                    WhatsApp {{ telefono }}
+                  </a>
+                  <a class="btn btn-secondary btn-block" href="{{ telHref }}" style="justify-content:center;margin-top:0;gap:8px">
+                    <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M92 40l24 44-22 22a96 96 0 0 0 56 56l22-22 44 24-14 32c-64 8-150-78-142-142Z"/></svg>
+                    Llamar ahora
+                  </a>
+                </div>
+                <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px">
+                  <span style="display:block;background:var(--sa-logo-chip);border-radius:7px;padding:6px 10px;line-height:0">
+                    <img src="assets/samada-logo.png" alt="Samada" style="height:16px;width:auto;display:block">
+                  </span>
+                  <span style="font-size:9.5px;color:var(--sa-t4);text-align:right">Catálogo interactivo Samada<br>Piura, Perú</span>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.esVacio }}" hint-placeholder-val="{{ false }}">
+              <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:30px;background:var(--sa-surface);text-align:center">
+                <svg width="26" height="26" viewBox="0 0 256 256" fill="none" stroke="var(--sa-t4)" stroke-width="14" stroke-linecap="round"><circle cx="116" cy="116" r="76"/><path d="M170 170l50 50"/></svg>
+                <h3 style="margin:0;font-weight:500;font-size:17px">Sin resultados</h3>
+                <p style="margin:0;font-size:12px;color:var(--sa-t2);max-width:30ch">Ningún producto coincide con esta combinación de categoría y marca.</p>
+                <button class="btn btn-primary" type="button" onClick="{{ limpiar }}" style="font-size:12px">Quitar filtros</button>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ page.numIzq }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;left:clamp(14px,3cqw,22px);bottom:10px;font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;color:var(--sa-t4);pointer-events:none">{{ page.num }}</span>
+            </sc-if>
+            <sc-if value="{{ page.numDer }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;right:clamp(14px,3cqw,22px);bottom:10px;font:500 10px/1 Inter,sans-serif;letter-spacing:.1em;color:var(--sa-t4);pointer-events:none">{{ page.num }}</span>
+            </sc-if>
+
+          </article>
+        </sc-for>
+      </div>
+    </sc-for>
+
+    <sc-if value="{{ esEscritorio }}" hint-placeholder-val="{{ true }}">
+      <span style="position:absolute;top:0;bottom:0;left:50%;width:46px;transform:translateX(-50%);pointer-events:none;z-index:20;background:linear-gradient(90deg,transparent,var(--sa-spine-1) 46%,var(--sa-spine-2) 54%,transparent)"></span>
+    </sc-if>
+
+    <button type="button" aria-label="Página anterior" onClick="{{ atras }}" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);z-index:30;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--sa-line-2);background:var(--sa-btn-bg);backdrop-filter:blur(6px);color:var(--sa-text);cursor:pointer" style-hover="border-color:var(--sa-accent);color:var(--sa-accent)">
+      <svg width="17" height="17" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M160 48l-80 80 80 80"/></svg>
+    </button>
+    <button type="button" aria-label="Página siguiente" onClick="{{ adelante }}" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);z-index:30;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--sa-line-2);background:var(--sa-btn-bg);backdrop-filter:blur(6px);color:var(--sa-text);cursor:pointer" style-hover="border-color:var(--sa-accent);color:var(--sa-accent)">
+      <svg width="17" height="17" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M96 48l80 80-80 80"/></svg>
+    </button>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center">
+    <span style="font:500 11px/1 Inter,sans-serif;letter-spacing:.1em;color:var(--sa-t3)">{{ posicion }}</span>
+    <div style="display:flex;gap:5px;align-items:center">
+      <sc-for list="{{ dots }}" as="d" hint-placeholder-count="6">
+        <button type="button" aria-label="{{ d.aria }}" onClick="{{ d.pick }}" style="position:relative;width:22px;height:14px;padding:0;border:0;background:transparent;cursor:pointer">
+          <span style="position:absolute;left:1px;right:1px;top:6px;height:2px;border-radius:2px;background:var(--sa-dot)"></span>
+          <sc-if value="{{ d.on }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;left:1px;right:1px;top:5px;height:4px;border-radius:2px;background:var(--sa-accent)"></span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</main>
+
+<sc-if value="{{ esMovil }}" hint-placeholder-val="{{ false }}">
+  <a href="{{ waHref }}" target="_blank" rel="noopener" aria-label="WhatsApp" style="position:fixed;right:16px;bottom:20px;z-index:60;width:52px;height:52px;display:grid;place-items:center;border-radius:50%;background:var(--sa-accent-solid);color:var(--sa-accent-on);box-shadow:var(--sa-shadow-fab)">
+    <svg width="24" height="24" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"><path d="M45 196a96 96 0 1 1 35 35l-44 13Z"/><path d="M96 108c0 28 24 52 52 52l12-14 20 10c-4 14-16 22-32 22-34 0-64-30-64-64 0-16 8-28 22-32l10 20Z" fill="currentColor" stroke="none"/></svg>
+  </a>
+</sc-if>
+
+<sc-if value="{{ ficha }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" onClick="{{ cerrar }}" style="position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:14px;background:var(--sa-backdrop);backdrop-filter:blur(7px)">
+    <div onClick="{{ stop }}" style="width:min(940px,100%);max-height:92vh;overflow:auto;border-radius:14px;background:var(--sa-surface);box-shadow:0 0 0 1px var(--sa-line-solid),var(--sa-shadow-modal);display:flex;flex-wrap:wrap;animation:saRise .28s ease both">
+      <div style="flex:1 1 320px;min-width:0;padding:16px;background:linear-gradient(160deg,var(--sa-accent-deep),var(--sa-surface-deep) 70%)">
+        <div style="position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--sa-line);background:var(--sa-ph-1)">
+          <sc-if value="{{ ficha.imagen }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ ficha.imagen }}" alt="{{ ficha.nombre }}" style="width:100%;height:100%;object-fit:cover;display:block">
+          </sc-if>
+          <sc-if value="{{ ficha.noImagen }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,var(--sa-ph-1),var(--sa-ph-2))">
+              <div style="position:absolute;inset:0;background:linear-gradient(90deg,transparent,var(--sa-shine),transparent);animation:saShimmer 3.2s ease-in-out infinite"></div>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--sa-t4)">
+                <svg width="26" height="26" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="13"><rect x="32" y="48" width="192" height="160" rx="10"/><circle cx="94" cy="102" r="17"/><path d="M32 178l58-50 46 39 34-29 54 46"/></svg>
+                <span style="font:500 10px/1 Inter,sans-serif;letter-spacing:.09em">1200 × 1500</span>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+      <div style="flex:1 1 340px;min-width:0;padding:22px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+          <span style="font:500 9.5px/1.4 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sa-accent)">{{ ficha.ruta }}</span>
+          <button type="button" aria-label="Cerrar" onClick="{{ cerrar }}" class="btn btn-icon btn-secondary" style="flex:none">
+            <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round"><path d="M56 56l144 144M200 56L56 200"/></svg>
+          </button>
+        </div>
+        <h2 style="margin:0;font-weight:500;font-size:26px;line-height:1.1;letter-spacing:-.02em">{{ ficha.nombre }}</h2>
+        <span style="font-size:12px;color:var(--sa-t2)">{{ ficha.marcaTxt }} · SKU {{ ficha.sku }}</span>
+        <div style="display:flex;align-items:baseline;gap:10px">
+          <sc-if value="{{ ficha.consultar }}" hint-placeholder-val="{{ false }}">
+            <span style="font:500 20px/1 Inter,sans-serif;color:var(--sa-t1)">Consultar precio</span>
+          </sc-if>
+          <sc-if value="{{ ficha.conPrecio }}" hint-placeholder-val="{{ false }}">
+            <span style="font:500 36px/1 Inter,sans-serif;color:var(--sa-accent);letter-spacing:-.02em">{{ ficha.precioTxt }}</span>
+          </sc-if>
+          <sc-if value="{{ ficha.conAntes }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:14px;color:var(--sa-t3);text-decoration:line-through">{{ ficha.antesTxt }}</span>
+          </sc-if>
+        </div>
+        <p style="margin:0;font-size:13px;line-height:1.6;color:var(--sa-t1);text-wrap:pretty">{{ ficha.desc }}</p>
+        <table class="table" style="margin-top:2px">
+          <tbody>
+            <tr><th style="width:42%">Presentación</th><td>{{ ficha.presentacion }}</td></tr>
+            <tr><th>Indicado para</th><td>{{ ficha.uso }}</td></tr>
+            <tr><th>Disponible en</th><td>{{ sedeNombre }}</td></tr>
+          </tbody>
+        </table>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <a class="btn btn-primary" href="{{ ficha.wa }}" target="_blank" rel="noopener" style="gap:8px">
+            <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round"><path d="M45 196a96 96 0 1 1 35 35l-44 13Z"/></svg>
+            Pedir por WhatsApp
+          </a>
+          <a class="btn btn-secondary" href="{{ telHref }}" style="gap:8px">
+            <svg width="15" height="15" viewBox="0 0 256 256" fill="none" stroke="currentColor" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"><path d="M92 40l24 44-22 22a96 96 0 0 0 56 56l22-22 44 24-14 32c-64 8-150-78-142-142Z"/></svg>
+            Llamar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;temaInicial&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;oscuro&quot;,&quot;claro&quot;],&quot;default&quot;:&quot;oscuro&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Apariencia&quot;},&quot;transicion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;volteo3D&quot;,&quot;deslizar&quot;,&quot;fundido&quot;],&quot;default&quot;:&quot;volteo3D&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Interacción&quot;},&quot;porPagina&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;4&quot;,&quot;6&quot;,&quot;9&quot;],&quot;default&quot;:&quot;6&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Interacción&quot;},&quot;numerosPagina&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Interacción&quot;},&quot;politicaPrecio&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mixto&quot;,&quot;consultar&quot;],&quot;default&quot;:&quot;mixto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;},&quot;whatsapp&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;+51 999 999 999&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenido&quot;}}">
+/* Catálogo digital Samada — capa de datos + paginación + navegación.
+   El objeto `cms` replica el esquema que entregaría el panel autoadministrable:
+   marca / edicion / sedes / categorias[].subs[] / productos[].
+   `raw` es la tabla de productos en formato compacto; el orden de columnas es:
+   [categoria, subcategoria, nombre, presentacion, marca, precio, precioAntes, descripcion, uso, imagen]
+   precio = null  →  se muestra "Consultar precio" (política mixta). */
+class Component extends DCLogic {
+  cms = {
+    marca: { nombre: 'Samada', logo: 'assets/samada-logo.png' },
+    edicion: 'Edición 01 · 2026',
+    sedes: [{
+      id: 'piura-san-jose',
+      nombre: 'Sede Central Piura',
+      dir: 'Local Nro. 00C — Mercado San José',
+      ciudad: 'Veintiséis de Octubre, Piura',
+      horario: 'Lun a Sáb · 8:00–20:00'
+    }],
+    marcasCat: { loreal: "L'Oréal Paris" },
+    categorias: [
+      { slug: 'cabello', nombre: 'Cabello', subs: [['shampoo', 'Shampoo'], ['acondicionador', 'Acondicionador'], ['tratamiento', 'Tratamientos'], ['coloracion', 'Coloración'], ['styling', 'Styling']] },
+      { slug: 'piel', nombre: 'Cuidado de la piel', subs: [['facial', 'Facial'], ['corporal', 'Corporal'], ['solar', 'Protección solar']] },
+      { slug: 'maquillaje', nombre: 'Maquillaje', subs: [['rostro', 'Rostro'], ['ojos', 'Ojos'], ['labios', 'Labios']] },
+      { slug: 'tocador', nombre: 'Higiene y tocador', subs: [['bano', 'Baño'], ['desodorantes', 'Desodorantes'], ['bucal', 'Cuidado bucal']] },
+      { slug: 'salon', nombre: 'Salón profesional', subs: [['herramientas', 'Herramientas'], ['insumos', 'Insumos']] }
+    ]
+  };
+
+  raw = [
+    ['cabello', 'shampoo', 'Shampoo reparación total 5', '400 ml', 'loreal', 28.9, null, 'Limpia y repara los cinco signos del daño: sequedad, aspereza, puntas abiertas, quiebre y falta de brillo.', 'Cabello dañado o quebradizo', 'assets/prod_shampoo.webp'],
+    ['cabello', 'shampoo', 'Shampoo hidratación intensa', '680 ml', 'loreal', 42.5, 49.9, 'Formato salón con activos humectantes para cabello seco. Rinde hasta tres meses de uso diario.', 'Cabello seco', 'assets/prod_shampoo.webp'],
+    ['cabello', 'shampoo', 'Shampoo control caída', '400 ml', 'loreal', null, null, 'Fortalece la fibra desde la raíz y reduce la caída por quiebre. Precio sujeto a stock de campaña.', 'Cabello debilitado', 'assets/prod_shampoo.webp'],
+    ['cabello', 'acondicionador', 'Acondicionador reparación total 5', '400 ml', 'loreal', 26.9, null, 'Desenreda y sella la cutícula. Complemento directo del shampoo de la misma línea.', 'Uso diario', 'assets/prod_shampoo.webp'],
+    ['cabello', 'acondicionador', 'Acondicionador rizos definidos', '400 ml', 'loreal', 29.9, null, 'Define el rizo y controla el volumen sin engrasar. Deja el movimiento natural intacto.', 'Cabello rizado u ondulado', 'assets/prod_shampoo.webp'],
+    ['cabello', 'acondicionador', 'Acondicionador sin enjuague', '200 ml', 'loreal', 18.5, null, 'Protección térmica ligera antes del secador o la plancha. Se aplica en cabello húmedo.', 'Cabello con calor frecuente', 'assets/prod_shampoo.webp'],
+    ['cabello', 'tratamiento', 'Mascarilla nutrición profunda', '300 g', 'loreal', 34.9, null, 'Tratamiento semanal de tres minutos. Repone lípidos en cabello procesado con color o decoloración.', 'Cabello procesado', 'assets/prod_mascarilla.webp'],
+    ['cabello', 'tratamiento', 'Ampollas de queratina', 'Caja 6 × 10 ml', 'loreal', null, null, 'Choque de queratina para uso en salón. Disponible por caja o por unidad según stock.', 'Uso profesional', 'assets/prod_serum.webp'],
+    ['cabello', 'tratamiento', 'Sérum reparador de puntas', '100 ml', 'loreal', 31.0, null, 'Sella puntas abiertas y aporta brillo inmediato. No requiere enjuague.', 'Puntas abiertas', 'assets/prod_serum.webp'],
+    ['cabello', 'coloracion', 'Tinte permanente tono 6.0', 'Kit completo', 'loreal', 24.9, null, 'Cobertura total de canas con crema reveladora y acondicionador post color incluidos.', 'Cobertura de canas', 'assets/prod_tinte.webp'],
+    ['cabello', 'coloracion', 'Decolorante en polvo', '500 g', '', null, null, 'Polvo decolorante de uso profesional. Se vende con revelador aparte.', 'Uso profesional', 'assets/prod_tinte.webp'],
+    ['cabello', 'styling', 'Spray fijador fuerte', '250 ml', 'loreal', 22.9, null, 'Fijación firme sin residuo blanco. Cepilla sin quebrar el peinado.', 'Peinados de larga duración', 'assets/prod_spray.webp'],
+    ['cabello', 'styling', 'Crema para peinar antifrizz', '300 ml', 'loreal', 19.9, null, 'Controla el frizz en climas húmedos durante toda la jornada.', 'Clima húmedo', 'assets/prod_spray.webp'],
+    ['piel', 'facial', 'Crema facial hidratante FPS 15', '50 ml', 'loreal', 39.9, null, 'Hidratación diaria con protección solar básica. Textura ligera de rápida absorción.', 'Todo tipo de piel', 'assets/prod_facial.webp'],
+    ['piel', 'facial', 'Agua micelar 3 en 1', '400 ml', 'loreal', 33.5, 38.9, 'Desmaquilla, limpia y tonifica en un paso, sin enjuague ni sensación grasa.', 'Piel sensible', 'assets/prod_micelar.webp'],
+    ['piel', 'corporal', 'Loción corporal nutritiva', '400 ml', 'loreal', 27.9, null, 'Nutrición de 24 horas para piel seca. Absorción rápida, sin perfume intenso.', 'Piel seca', 'assets/prod_facial.webp'],
+    ['piel', 'solar', 'Protector solar facial FPS 50', '50 ml', 'loreal', 54.9, null, 'Alta protección UVA/UVB con acabado seco, apto bajo maquillaje.', 'Exposición diaria al sol', 'assets/prod_facial.webp'],
+    ['maquillaje', 'rostro', 'Base líquida cobertura media', '30 ml', 'loreal', 44.9, null, 'Acabado natural de larga duración. Disponible en seis tonos según stock.', 'Uso diario', 'assets/prod_maquillaje.webp'],
+    ['maquillaje', 'ojos', 'Máscara de pestañas volumen', '8 ml', 'loreal', 32.9, null, 'Cepillo de fibras para volumen inmediato sin grumos.', 'Pestañas cortas', 'assets/prod_maquillaje.webp'],
+    ['maquillaje', 'labios', 'Labial mate larga duración', 'Barra 3,6 g', 'loreal', 26.5, null, 'Color intenso con acabado mate confortable, hasta ocho horas.', 'Uso diario', 'assets/prod_maquillaje.webp'],
+    ['tocador', 'bano', 'Jabón líquido corporal', '750 ml', '', 16.9, null, 'Fórmula suave con glicerina. Formato familiar con dosificador.', 'Toda la familia', 'assets/prod_tocador.webp'],
+    ['tocador', 'desodorantes', 'Desodorante antitranspirante', '150 ml', '', 14.5, null, 'Protección 48 horas, sin alcohol. Presentación en aerosol.', 'Uso diario', 'assets/prod_tocador.webp'],
+    ['tocador', 'bucal', 'Crema dental blanqueadora', '90 g', '', 12.9, null, 'Limpieza profunda con acción antisarro y aliento fresco prolongado.', 'Uso diario', 'assets/prod_tocador.webp'],
+    ['salon', 'herramientas', 'Tijera de corte profesional 5.5"', 'Unidad', '', null, null, 'Acero inoxidable con tornillo ajustable. Incluye estuche.', 'Uso profesional', 'assets/prod_tijera.webp'],
+    ['salon', 'insumos', 'Capa de corte impermeable', 'Unidad', '', 22.0, null, 'Capa antiadherente con cierre a presión, lavable.', 'Uso profesional', 'assets/prod_tijera.webp']
+  ];
+
+  state = { cat: 'all', sub: 'all', marca: 'all', unidad: 0, anim: null, ficha: null, sede: 0, vw: 1280, tema: 'oscuro' };
+
+  /* ── ciclo de vida: teclado, resize ─────────────────────────────── */
+  componentDidMount() {
+    this._resize = () => { if (window.innerWidth !== this.state.vw) this.setState({ vw: window.innerWidth }); };
+    this._key = (e) => {
+      if (e.key === 'Escape') { this.setState({ ficha: null }); return; }
+      if (this.state.ficha) return;
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') this.mover(1);
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') this.mover(-1);
+    };
+    let t = this.props.temaInicial ?? 'oscuro';
+    try { const g = localStorage.getItem('samada:tema'); if (g === 'claro' || g === 'oscuro') t = g; } catch (e) {}
+    this.aplicarTema(t);
+    window.addEventListener('resize', this._resize);
+    window.addEventListener('keydown', this._key);
+    this._resize();
+  }
+  /* El tema vive en <html data-tema>; el CSS del helmet resuelve los tokens. */
+  aplicarTema(t) {
+    try { document.documentElement.setAttribute('data-tema', t); } catch (e) {}
+    try { localStorage.setItem('samada:tema', t); } catch (e) {}
+    if (this.state.tema !== t) this.setState({ tema: t });
+  }
+  componentDidUpdate(prevProps) {
+    const p = this.props.temaInicial;
+    if (p && prevProps.temaInicial !== p && p !== this.state.tema) this.aplicarTema(p);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resize);
+    window.removeEventListener('keydown', this._key);
+    clearTimeout(this._t);
+  }
+
+  esMovil() { return this.state.vw < 900; }
+  perPagina() { return parseInt(this.props.porPagina ?? '6', 10) || 6; }
+  soles(n) { return 'S/ ' + n.toFixed(2); }
+  telefono() { return this.props.whatsapp ?? '+51 999 999 999'; }
+  digitos() { return String(this.telefono()).replace(/[^0-9]/g, ''); }
+  sede() { return this.cms.sedes[this.state.sede] || this.cms.sedes[0]; }
+
+  wa(txt) {
+    const s = this.sede();
+    const msg = 'Hola Samada, escribo desde el catálogo digital. ' + (txt ? 'Me interesa: ' + txt + '. ' : '') + '¿Tienen stock en ' + s.nombre + '?';
+    return 'https://wa.me/' + this.digitos() + '?text=' + encodeURIComponent(msg);
+  }
+
+  nombreCat(slug) { const c = this.cms.categorias.find(c => c.slug === slug); return c ? c.nombre : slug; }
+  nombreSub(cat, slug) {
+    const c = this.cms.categorias.find(c => c.slug === cat);
+    const s = c && c.subs.find(s => s[0] === slug);
+    return s ? s[1] : slug;
+  }
+
+  /* ── productos: normalización + vista ───────────────────────────── */
+  productos() {
+    return this.raw.map((r, i) => ({
+      id: 'p' + (i + 1), cat: r[0], sub: r[1], nombre: r[2], presentacion: r[3],
+      marca: r[4], precio: r[5], antes: r[6], desc: r[7], uso: r[8],
+      imagen: r[9] || null,
+      sku: 'SAM-' + (1240 + i)
+    }));
+  }
+
+  vista(p) {
+    const consultar = p.precio == null || (this.props.politicaPrecio ?? 'mixto') === 'consultar';
+    return Object.assign({}, p, {
+      marcaTxt: this.cms.marcasCat[p.marca] || (p.marca ? p.marca : 'Marca por asignar'),
+      ruta: this.nombreCat(p.cat) + ' › ' + this.nombreSub(p.cat, p.sub),
+      consultar, conPrecio: !consultar,
+      precioTxt: p.precio != null ? this.soles(p.precio) : '',
+      conAntes: !consultar && p.antes != null,
+      antesTxt: p.antes != null ? this.soles(p.antes) : '',
+      imagen: p.imagen,
+      noImagen: !p.imagen,
+      wa: this.wa(p.nombre),
+      open: () => this.setState({ ficha: this.vista(p) })
+    });
+  }
+
+  filtrados() {
+    const { cat, sub, marca } = this.state;
+    const orden = this.cms.categorias.map(c => c.slug);
+    return this.productos()
+      .filter(p => cat === 'all' || p.cat === cat)
+      .filter(p => sub === 'all' || p.sub === sub)
+      .filter(p => marca === 'all' || (marca === 'sin' ? !p.marca : p.marca === marca))
+      .sort((a, b) => orden.indexOf(a.cat) - orden.indexOf(b.cat) || a.sub.localeCompare(b.sub));
+  }
+
+  /* ── paginación: portada, índice, spreads de producto, contacto ─── */
+  paginas() {
+    const movil = this.esMovil();
+    const per = this.perPagina();
+    const lista = this.filtrados();
+    const pg = [];
+
+    if (movil) pg.push({ t: 'portadaTexto' });
+    else pg.push({ t: 'portadaArte' }, { t: 'portadaTexto' });
+
+    if (!movil) pg.push({ t: 'indiceIntro' });
+    pg.push({ t: 'indice' });
+
+    const arranques = {};
+    if (!lista.length) {
+      pg.push({ t: 'vacio' });
+      if (!movil) pg.push({ t: 'vacio' });
+    } else {
+      for (let i = 0; i < lista.length; i += per + 1) {
+        const bloque = lista.slice(i, i + per + 1);
+        const cabeza = bloque[0];
+        if (arranques[cabeza.cat] == null) arranques[cabeza.cat] = pg.length + 1;
+        pg.push({ t: 'destacado', item: this.vista(cabeza), kicker: this.nombreCat(cabeza.cat) + ' · ' + this.nombreSub(cabeza.cat, cabeza.sub) });
+        const resto = bloque.slice(1);
+        pg.push({
+          t: 'grilla',
+          titulo: this.nombreCat(cabeza.cat),
+          conteo: resto.length ? resto.length + ' productos' : 'Cierre',
+          items: resto.map(p => this.vista(p)),
+          vacia: resto.length === 0
+        });
+      }
+    }
+
+    if (!movil) pg.push({ t: 'contactoArte' });
+    pg.push({ t: 'contacto' });
+    if (!movil && pg.length % 2) pg.push({ t: 'contactoArte' });
+
+    this._arranques = arranques;
+    return pg.map((p, i) => {
+      const num = i + 1;
+      const numerar = (this.props.numerosPagina ?? true) && p.t !== 'portadaArte' && p.t !== 'portadaTexto';
+      const par = num % 2 === 0;
+      return Object.assign({}, p, {
+        num: numerar ? String(num).padStart(2, '0') : null,
+        numIzq: numerar && !movil && !par, numDer: numerar && (movil || par),
+        label: 'Pág ' + num + ' · ' + p.t,
+        esPortadaArte: p.t === 'portadaArte', esPortadaTexto: p.t === 'portadaTexto',
+        esIndiceIntro: p.t === 'indiceIntro', esIndice: p.t === 'indice',
+        esDestacado: p.t === 'destacado', esGrilla: p.t === 'grilla',
+        esContactoArte: p.t === 'contactoArte', esContacto: p.t === 'contacto',
+        esVacio: p.t === 'vacio'
+      });
+    });
+  }
+
+  unidades() {
+    const pg = this.paginas();
+    if (this.esMovil()) return pg.map(p => [p]);
+    const u = [];
+    for (let i = 0; i < pg.length; i += 2) u.push(pg.slice(i, i + 2));
+    return u;
+  }
+
+  /* ── navegación con volteo ──────────────────────────────────────── */
+  mover(dir) { this.irA(this.state.unidad + dir); }
+  irA(n) {
+    const total = this.unidades().length;
+    if (this.state.anim || n < 0 || n >= total || n === this.state.unidad) return;
+    const dir = n > this.state.unidad ? 1 : -1;
+    this.setState({ anim: { dir, destino: n, fase: 0 } });
+    requestAnimationFrame(() => requestAnimationFrame(() =>
+      this.setState(s => (s.anim ? { anim: Object.assign({}, s.anim, { fase: 1 }) } : {}))));
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ unidad: n, anim: null }), 560);
+  }
+
+  capaStyle(rol, a) {
+    const base = { position: 'absolute', inset: 0, display: 'flex', gap: this.esMovil() ? '0' : '3px', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', '--sa-card': this.perPagina() > 6 ? '108px' : '150px' };
+    if (rol === 'rest') return Object.assign(base, { zIndex: 1 });
+    const modo = this.props.transicion ?? 'volteo3D';
+    const fwd = a.dir > 0;
+    const trans = 'transform .55s cubic-bezier(.22,.72,.16,1), opacity .55s ease, box-shadow .55s ease';
+    if (rol === 'in') {
+      let inicio = fwd ? 'translateX(9%) rotateY(66deg)' : 'translateX(-9%) rotateY(-66deg)';
+      if (modo === 'deslizar') inicio = fwd ? 'translateX(103%)' : 'translateX(-103%)';
+      if (modo === 'fundido') inicio = 'scale(.93)';
+      return Object.assign(base, {
+        zIndex: 3, transition: trans, transformOrigin: fwd ? 'left center' : 'right center',
+        transform: a.fase ? 'none' : inicio,
+        opacity: a.fase ? 1 : (modo === 'deslizar' ? 1 : .2),
+        boxShadow: a.fase ? 'none' : 'var(--sa-shadow-flip)'
+      });
+    }
+    let fin = fwd ? 'translateX(-4%) scale(.96)' : 'translateX(4%) scale(.96)';
+    if (modo === 'deslizar') fin = fwd ? 'translateX(-103%)' : 'translateX(103%)';
+    if (modo === 'fundido') fin = 'scale(1.03)';
+    return Object.assign(base, {
+      zIndex: 2, transition: trans, transformOrigin: fwd ? 'left center' : 'right center',
+      transform: a.fase ? fin : 'none', opacity: a.fase ? (modo === 'deslizar' ? 1 : .12) : 1,
+      filter: this.state.tema === 'claro' ? 'brightness(.97)' : 'brightness(.82)'
+    });
+  }
+
+  /* ── gestos ─────────────────────────────────────────────────────── */
+  tStart = (e) => { const t = e.touches && e.touches[0]; this._sx = t ? t.clientX : 0; this._sy = t ? t.clientY : 0; };
+  tEnd = (e) => {
+    const t = e.changedTouches && e.changedTouches[0];
+    if (!t) return;
+    const dx = t.clientX - this._sx, dy = t.clientY - this._sy;
+    if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) this.mover(dx < 0 ? 1 : -1);
+  };
+
+  primeraUnidadContenido() { return this.esMovil() ? 2 : 2; }
+
+  renderVals() {
+    const movil = this.esMovil();
+    const s = this.sede();
+    const todos = this.productos();
+    const unidades = this.unidades();
+    const idx = Math.min(this.state.unidad, unidades.length - 1);
+    const a = this.state.anim;
+
+    const capas = a
+      ? [{ pages: unidades[idx] || [], style: this.capaStyle('out', a) },
+         { pages: unidades[a.destino] || [], style: this.capaStyle('in', a) }]
+      : [{ pages: unidades[idx] || [], style: this.capaStyle('rest') }];
+
+    const conteo = (f) => todos.filter(f).length;
+    const cats = [{ slug: 'all', nombre: 'Todo', n: todos.length }]
+      .concat(this.cms.categorias.map(c => ({ slug: c.slug, nombre: c.nombre, n: conteo(p => p.cat === c.slug) })))
+      .map(c => Object.assign(c, {
+        on: this.state.cat === c.slug,
+        pick: () => this.setState({ cat: c.slug, sub: 'all', unidad: this.primeraUnidadContenido(), anim: null })
+      }));
+
+    const catActual = this.cms.categorias.find(c => c.slug === this.state.cat);
+    const subs = catActual
+      ? [{ slug: 'all', nombre: 'Todas' }].concat(catActual.subs.map(x => ({ slug: x[0], nombre: x[1] })))
+        .map(x => Object.assign(x, {
+          on: this.state.sub === x.slug,
+          pick: () => this.setState({ sub: x.slug, unidad: this.primeraUnidadContenido(), anim: null })
+        }))
+      : [];
+
+    const marcasBase = [{ slug: 'all', nombre: 'Todas' }]
+      .concat(Object.keys(this.cms.marcasCat).map(k => ({ slug: k, nombre: this.cms.marcasCat[k] })));
+    if (todos.some(p => !p.marca)) marcasBase.push({ slug: 'sin', nombre: 'Sin asignar' });
+    const marcas = marcasBase.map(m => Object.assign(m, {
+      on: this.state.marca === m.slug,
+      pick: () => this.setState({ marca: m.slug, unidad: this.primeraUnidadContenido(), anim: null })
+    }));
+
+    const indice = this.cms.categorias.map((c, i) => ({
+      orden: String(i + 1).padStart(2, '0'),
+      nombre: c.nombre,
+      n: conteo(p => p.cat === c.slug) + ' ref.',
+      pag: this._arranques && this._arranques[c.slug] ? String(this._arranques[c.slug]).padStart(2, '0') : '—',
+      pick: () => this.setState({ cat: c.slug, sub: 'all', unidad: this.primeraUnidadContenido(), anim: null })
+    }));
+
+    return {
+      esMovil: movil, esEscritorio: !movil,
+      edicion: this.cms.edicion,
+      sedes: this.cms.sedes.map(x => ({ id: x.id, opcion: x.nombre + ' — ' + x.ciudad })),
+      elegirSede: (e) => { const i = this.cms.sedes.findIndex(x => x.id === e.target.value); this.setState({ sede: i < 0 ? 0 : i }); },
+      sedeNombre: s.nombre, sedeDir: s.dir, sedeCiudad: s.ciudad, sedeHorario: s.horario,
+      telefono: this.telefono(), telHref: 'tel:+' + this.digitos(), waHref: this.wa(''),
+      cats, subs, marcas, haySubs: subs.length > 0, indice,
+      hayFiltro: this.state.cat !== 'all' || this.state.marca !== 'all' || this.state.sub !== 'all',
+      limpiar: () => this.setState({ cat: 'all', sub: 'all', marca: 'all', unidad: this.primeraUnidadContenido(), anim: null }),
+      totalProductos: todos.length, totalCategorias: this.cms.categorias.length, totalSedes: this.cms.sedes.length,
+      layers: capas,
+      stageStyle: {
+        position: 'relative', width: '100%', maxWidth: movil ? '430px' : '1180px',
+        aspectRatio: movil ? '0.70' : '1.415', perspective: '2400px',
+        transformStyle: 'preserve-3d', touchAction: 'pan-y'
+      },
+      posicion: (idx + 1) + ' / ' + unidades.length,
+      atras: () => this.mover(-1), adelante: () => this.mover(1),
+      dots: unidades.map((_, i) => ({ on: i === idx, aria: 'Ir a la vista ' + (i + 1), pick: () => this.irA(i) })),
+      temaOscuro: this.state.tema !== 'claro', temaClaro: this.state.tema === 'claro',
+      temaAria: this.state.tema === 'claro' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro',
+      cambiarTema: () => this.aplicarTema(this.state.tema === 'claro' ? 'oscuro' : 'claro'),
+      ficha: this.state.ficha,
+      cerrar: () => this.setState({ ficha: null }),
+      stop: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>
