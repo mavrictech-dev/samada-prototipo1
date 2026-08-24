@@ -1838,12 +1838,39 @@
   function loadReactUmd() {
     const w = window;
     if (w.React && w.ReactDOM) return Promise.resolve();
-    const react = cdnScriptFor(REACT_URL, REACT_SRI);
-    const reactDom = cdnScriptFor(REACT_DOM_URL, REACT_DOM_SRI);
-    return Promise.all([
-      loadScript(react.src, react.integrity),
-      loadScript(reactDom.src, reactDom.integrity)
-    ]).then(() => void 0);
+    return new Promise((resolve, reject) => {
+      const load = (src) => new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = src;
+        s.async = false;
+        s.onload = () => res();
+        s.onerror = () => rej(new Error(`Failed to load ${src}`));
+        document.head.appendChild(s);
+      });
+      load("assets/react.production.min.js")
+        .then(() => load("assets/react-dom.production.min.js"))
+        .then(() => {
+          if (w.React && w.ReactDOM) resolve();
+          else throw new Error("React local not initialized");
+        })
+        .catch(() => {
+          load("https://unpkg.com/react@18.3.1/umd/react.production.min.js")
+            .then(() => load("https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"))
+            .then(() => {
+              if (w.React && w.ReactDOM) resolve();
+              else throw new Error("React unpkg not initialized");
+            })
+            .catch(() => {
+              load("https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js")
+                .then(() => load("https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"))
+                .then(() => {
+                  if (w.React && w.ReactDOM) resolve();
+                  else reject(new Error("Failed to load React from all sources"));
+                })
+                .catch(reject);
+            });
+        });
+    });
   }
   function init() {
     const runtime = createRuntime(document);
@@ -1868,6 +1895,7 @@
       }
     };
     const streams = createStreamTracker();
+    let booted = false;
     const api = {
       __dcUpdate: (name, kind, content, streaming, viewportKey) => {
         streams.push(name, streaming, viewportKey);
@@ -1888,8 +1916,13 @@
       /** Editor bridge — the *original* (decoded) template source. */
       __dcTemplateSource: (name) => runtime.templateSource(name),
       __dcBoot: () => {
-        rootName = boot(runtime, document) ?? rootName;
-        notifyHost();
+        if (booted) return;
+        const b = boot(runtime, document);
+        if (b) {
+          booted = true;
+          rootName = b;
+          notifyHost();
+        }
       },
       __dcRegistry: runtime.registry.entries,
       getDC: (name) => runtime.getDC(name),
@@ -1900,12 +1933,24 @@
     };
     Object.assign(window, api);
     window.__dcContentKeyed = true;
-    if (document.readyState !== "loading") api.__dcBoot();
-    else document.addEventListener("DOMContentLoaded", () => api.__dcBoot());
+    function tryBoot() {
+      if (!booted && document.querySelector("x-dc")) {
+        api.__dcBoot();
+      }
+    }
+    tryBoot();
+    if (!booted) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", tryBoot);
+      }
+      window.addEventListener("load", tryBoot);
+      setTimeout(tryBoot, 50);
+      setTimeout(tryBoot, 200);
+      setTimeout(tryBoot, 600);
+    }
   }
   hideRawTemplate();
   loadReactUmd().then(init).catch((err) => {
     console.error("[dc] failed to load React or boot:", err);
-    throw err;
   });
 })();
