@@ -79,8 +79,13 @@ button{font-family:inherit}
 <div style="min-height:100vh;display:flex;flex-direction:column;font-family:Inter,system-ui,sans-serif;background:radial-gradient(120% 70% at 50% -15%,var(--sa-bg-2) 0%,var(--sa-bg) 55%)">
 
 <header style="display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:11px 18px;position:sticky;top:0;z-index:40;background:var(--sa-bar);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--sa-line)">
-  <span style="display:block;background:var(--sa-logo-chip);border-radius:8px;padding:7px 12px;flex:none;line-height:0">
-    <img src="assets/samada-logo.png" alt="Samada" style="height:20px;width:auto;display:block">
+  <span style="display:block;line-height:0;flex:none">
+    <sc-if value="{{ temaClaro }}" hint-placeholder-val="{{ false }}">
+      <img src="assets/samada-logo-light.webp" alt="Samada" style="height:32px;width:auto;display:block">
+    </sc-if>
+    <sc-if value="{{ temaOscuro }}" hint-placeholder-val="{{ true }}">
+      <img src="assets/samada-logo-dark.webp" alt="Samada" style="height:32px;width:auto;display:block">
+    </sc-if>
   </span>
   <span style="font:500 10px/1.2 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--sa-t3);margin-right:auto">Catálogo<br>digital</span>
 
@@ -175,8 +180,13 @@ button{font-family:inherit}
 
             <sc-if value="{{ page.esPortadaTexto }}" hint-placeholder-val="{{ true }}">
               <div style="height:100%;padding:clamp(20px,5cqw,40px);display:flex;flex-direction:column;background:linear-gradient(200deg,var(--sa-surface),var(--sa-surface-deep))">
-                <span style="display:block;background:var(--sa-logo-chip);border-radius:8px;padding:8px 13px;line-height:0;align-self:flex-start">
-                  <img src="assets/samada-logo.png" alt="Samada" style="height:clamp(18px,3.4cqw,26px);width:auto;display:block">
+                <span style="display:block;line-height:0;align-self:flex-start">
+                  <sc-if value="{{ temaClaro }}" hint-placeholder-val="{{ false }}">
+                    <img src="assets/samada-logo-light.webp" alt="Samada" style="height:clamp(30px,5.5cqw,44px);width:auto;display:block">
+                  </sc-if>
+                  <sc-if value="{{ temaOscuro }}" hint-placeholder-val="{{ true }}">
+                    <img src="assets/samada-logo-dark.webp" alt="Samada" style="height:clamp(30px,5.5cqw,44px);width:auto;display:block">
+                  </sc-if>
                 </span>
                 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(8px,1.6cqw,14px)">
                   <span style="font:500 clamp(9px,2cqw,11px)/1 Inter,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--sa-accent)">{{ edicion }}</span>
@@ -345,8 +355,13 @@ button{font-family:inherit}
                   </a>
                 </div>
                 <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px">
-                  <span style="display:block;background:var(--sa-logo-chip);border-radius:7px;padding:6px 10px;line-height:0">
-                    <img src="assets/samada-logo.png" alt="Samada" style="height:16px;width:auto;display:block">
+                  <span style="display:block;line-height:0">
+                    <sc-if value="{{ temaClaro }}" hint-placeholder-val="{{ false }}">
+                      <img src="assets/samada-logo-light.webp" alt="Samada" style="height:26px;width:auto;display:block">
+                    </sc-if>
+                    <sc-if value="{{ temaOscuro }}" hint-placeholder-val="{{ true }}">
+                      <img src="assets/samada-logo-dark.webp" alt="Samada" style="height:26px;width:auto;display:block">
+                    </sc-if>
                   </span>
                   <span style="font-size:9.5px;color:var(--sa-t4);text-align:right">Catálogo interactivo Samada<br>Piura, Perú</span>
                 </div>
