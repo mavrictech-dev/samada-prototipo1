@@ -636,8 +636,8 @@ class Component extends DCLogic {
     const lista = this.filtrados();
     const pg = [];
 
-    if (movil) pg.push({ t: 'portadaTexto' });
-    else pg.push({ t: 'portadaArte' }, { t: 'portadaTexto' });
+    pg.push({ t: 'portadaArte' });
+    pg.push({ t: 'portadaTexto' });
 
     if (!movil) pg.push({ t: 'indiceIntro' });
     pg.push({ t: 'indice' });
@@ -663,7 +663,7 @@ class Component extends DCLogic {
       }
     }
 
-    if (!movil) pg.push({ t: 'contactoArte' });
+    pg.push({ t: 'contactoArte' });
     pg.push({ t: 'contacto' });
     if (!movil && pg.length % 2) pg.push({ t: 'contactoArte' });
 
@@ -703,33 +703,51 @@ class Component extends DCLogic {
     requestAnimationFrame(() => requestAnimationFrame(() =>
       this.setState(s => (s.anim ? { anim: Object.assign({}, s.anim, { fase: 1 }) } : {}))));
     clearTimeout(this._t);
-    this._t = setTimeout(() => this.setState({ unidad: n, anim: null }), 560);
+    this._t = setTimeout(() => this.setState({ unidad: n, anim: null }), 420);
   }
 
   capaStyle(rol, a) {
-    const base = { position: 'absolute', inset: 0, display: 'flex', gap: this.esMovil() ? '0' : '3px', transformStyle: 'preserve-3d', backfaceVisibility: 'hidden', '--sa-card': this.perPagina() > 6 ? '108px' : '150px' };
+    const movil = this.esMovil();
+    const base = {
+      position: 'absolute',
+      inset: 0,
+      display: 'flex',
+      gap: movil ? '0' : '3px',
+      transformStyle: movil ? 'flat' : 'preserve-3d',
+      backfaceVisibility: 'hidden',
+      '--sa-card': this.perPagina() > 6 ? '108px' : '150px'
+    };
     if (rol === 'rest') return Object.assign(base, { zIndex: 1 });
-    const modo = this.props.transicion ?? 'volteo3D';
+    const modo = movil ? 'deslizar' : (this.props.transicion ?? 'volteo3D');
     const fwd = a.dir > 0;
-    const trans = 'transform .55s cubic-bezier(.22,.72,.16,1), opacity .55s ease, box-shadow .55s ease';
+    const trans = movil
+      ? 'transform .38s cubic-bezier(.25,1,.5,1)'
+      : 'transform .55s cubic-bezier(.22,.72,.16,1), opacity .55s ease, box-shadow .55s ease';
+
     if (rol === 'in') {
-      let inicio = fwd ? 'translateX(9%) rotateY(66deg)' : 'translateX(-9%) rotateY(-66deg)';
-      if (modo === 'deslizar') inicio = fwd ? 'translateX(103%)' : 'translateX(-103%)';
-      if (modo === 'fundido') inicio = 'scale(.93)';
+      let inicio = fwd ? 'translateX(100%)' : 'translateX(-100%)';
+      if (!movil && modo === 'volteo3D') inicio = fwd ? 'translateX(9%) rotateY(66deg)' : 'translateX(-9%) rotateY(-66deg)';
+      if (!movil && modo === 'fundido') inicio = 'scale(.93)';
       return Object.assign(base, {
-        zIndex: 3, transition: trans, transformOrigin: fwd ? 'left center' : 'right center',
-        transform: a.fase ? 'none' : inicio,
-        opacity: a.fase ? 1 : (modo === 'deslizar' ? 1 : .2),
-        boxShadow: a.fase ? 'none' : 'var(--sa-shadow-flip)'
+        zIndex: 3,
+        transition: trans,
+        transformOrigin: fwd ? 'left center' : 'right center',
+        transform: a.fase ? (movil ? 'translateX(0)' : 'none') : inicio,
+        opacity: 1,
+        boxShadow: (!movil && !a.fase) ? 'var(--sa-shadow-flip)' : 'none'
       });
     }
-    let fin = fwd ? 'translateX(-4%) scale(.96)' : 'translateX(4%) scale(.96)';
-    if (modo === 'deslizar') fin = fwd ? 'translateX(-103%)' : 'translateX(103%)';
-    if (modo === 'fundido') fin = 'scale(1.03)';
+
+    let fin = fwd ? 'translateX(-100%)' : 'translateX(100%)';
+    if (!movil && modo === 'volteo3D') fin = fwd ? 'translateX(-4%) scale(.96)' : 'translateX(4%) scale(.96)';
+    if (!movil && modo === 'fundido') fin = 'scale(1.03)';
     return Object.assign(base, {
-      zIndex: 2, transition: trans, transformOrigin: fwd ? 'left center' : 'right center',
-      transform: a.fase ? fin : 'none', opacity: a.fase ? (modo === 'deslizar' ? 1 : .12) : 1,
-      filter: this.state.tema === 'claro' ? 'brightness(.97)' : 'brightness(.82)'
+      zIndex: 2,
+      transition: trans,
+      transformOrigin: fwd ? 'left center' : 'right center',
+      transform: a.fase ? fin : (movil ? 'translateX(0)' : 'none'),
+      opacity: movil ? 1 : (a.fase ? (modo === 'deslizar' ? 1 : .12) : 1),
+      filter: (!movil && a.fase) ? (this.state.tema === 'claro' ? 'brightness(.97)' : 'brightness(.82)') : 'none'
     });
   }
 
@@ -742,7 +760,7 @@ class Component extends DCLogic {
     if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) this.mover(dx < 0 ? 1 : -1);
   };
 
-  primeraUnidadContenido() { return this.esMovil() ? 2 : 2; }
+  primeraUnidadContenido() { return this.esMovil() ? 3 : 2; }
 
   renderVals() {
     const movil = this.esMovil();
@@ -804,8 +822,9 @@ class Component extends DCLogic {
       layers: capas,
       stageStyle: {
         position: 'relative', width: '100%', maxWidth: movil ? '430px' : '1180px',
-        aspectRatio: movil ? '0.70' : '1.415', perspective: '2400px',
-        transformStyle: 'preserve-3d', touchAction: 'pan-y'
+        aspectRatio: movil ? '0.70' : '1.415', perspective: movil ? 'none' : '2400px',
+        transformStyle: movil ? 'flat' : 'preserve-3d', touchAction: 'pan-y',
+        overflow: movil ? 'hidden' : 'visible'
       },
       posicion: (idx + 1) + ' / ' + unidades.length,
       atras: () => this.mover(-1), adelante: () => this.mover(1),
