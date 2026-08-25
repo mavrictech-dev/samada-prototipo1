@@ -25,12 +25,13 @@
     const dc = doc.querySelector("x-dc");
     if (!dc) return null;
     const scriptEl = doc.querySelector("script[data-dc-script]");
+    if (!scriptEl || !scriptEl.textContent.trim()) return null;
     const { props, preview } = parseDataProps(
-      scriptEl?.getAttribute("data-props") ?? null
+      scriptEl.getAttribute("data-props") ?? null
     );
     return {
       template: dc.innerHTML,
-      js: scriptEl ? scriptEl.textContent || "" : "",
+      js: scriptEl.textContent || "",
       props,
       preview
     };
@@ -1927,8 +1928,12 @@
     Object.assign(window, api);
     window.__dcContentKeyed = true;
     function tryBoot() {
-      if (!booted && document.querySelector("x-dc")) {
-        api.__dcBoot();
+      if (!booted) {
+        const dc = document.querySelector("x-dc");
+        const script = document.querySelector("script[data-dc-script]");
+        if (dc && script && script.textContent.trim().length > 50) {
+          api.__dcBoot();
+        }
       }
     }
     tryBoot();
@@ -1936,10 +1941,13 @@
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", tryBoot);
       }
+      document.addEventListener("readystatechange", tryBoot);
       window.addEventListener("load", tryBoot);
-      setTimeout(tryBoot, 50);
-      setTimeout(tryBoot, 200);
+      setTimeout(tryBoot, 30);
+      setTimeout(tryBoot, 100);
+      setTimeout(tryBoot, 250);
       setTimeout(tryBoot, 600);
+      setTimeout(tryBoot, 1200);
     }
   }
   hideRawTemplate();
